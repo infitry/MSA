@@ -1,9 +1,8 @@
 package com.brownfield.pss.client;
 
- 
 public class Flight {
 
-  	long id;
+	long id;
 	
 	String flightNumber;
 	String origin;
