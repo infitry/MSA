@@ -18,12 +18,9 @@ public class Application implements CommandLineRunner {
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
    	RestTemplate searchClient = new RestTemplate();
-	
-  	 RestTemplate bookingClient = new RestTemplate();
-	
+  	RestTemplate bookingClient = new RestTemplate();
    	RestTemplate checkInClient = new RestTemplate();
-	
-	 RestTemplate restClient= new RestTemplate();
+	RestTemplate restClient= new RestTemplate();
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -39,7 +36,7 @@ public class Application implements CommandLineRunner {
 		Arrays.asList(flights).forEach(flight -> logger.info(" flight >"+ flight));
   		
 		//create a booking only if there are flights.
- 		if(flights == null || flights.length == 0){
+ 		if (flights == null || flights.length == 0) {
  			return;
  		}
 		Flight flight = flights[0];
@@ -49,12 +46,12 @@ public class Application implements CommandLineRunner {
 		Set<Passenger> passengers = new HashSet<Passenger>();
 		passengers.add(new Passenger("Gavin","Franc","Male", booking));
 		booking.setPassengers(passengers);
-		long bookingId =0;
+		long bookingId = 0;
 		try { 
 			//long bookingId = bookingClient.postForObject("http://book-service/booking/create", booking, long.class); 
 			 bookingId = bookingClient.postForObject("http://localhost:8060/booking/create", booking, long.class); 
 			logger.info("Booking created "+ bookingId);
-		}catch (Exception e){
+		} catch (Exception e) {
 			logger.error("BOOKING SERVICE NOT AVAILABLE...!!!");
 		}
 		
@@ -64,7 +61,7 @@ public class Application implements CommandLineRunner {
 			CheckInRecord checkIn = new CheckInRecord("Franc", "Gavin", "28C", null, "BF101","22-JAN-16", bookingId);
 			long checkinId = checkInClient.postForObject("http://localhost:8070/checkin/create", checkIn, long.class); 
 			logger.info("Checked IN "+ checkinId);
-		}catch (Exception e){
+		} catch (Exception e) {
 			logger.error("CHECK IN SERVICE NOT AVAILABLE...!!!"); 
 		}
 	}

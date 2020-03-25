@@ -22,9 +22,7 @@ public class BrownFieldSiteController {
 	private static final Logger logger = LoggerFactory.getLogger(BrownFieldSiteController.class);
 
   	RestTemplate searchClient = new RestTemplate();
-
   	RestTemplate bookingClient = new RestTemplate();
-
   	RestTemplate checkInClient = new RestTemplate();
 	
     @RequestMapping(value="/", method=RequestMethod.GET)
@@ -68,11 +66,11 @@ public class BrownFieldSiteController {
 		Passenger pax = uiData.getPassenger();
 		pax.setBookingRecord(booking);
 		passengers.add(uiData.getPassenger());
-	 		booking.setPassengers(passengers);
-		long bookingId =0;
+	 	booking.setPassengers(passengers);
+		long bookingId = 0;
 		try { 
 			//long bookingId = bookingClient.postForObject("http://book-service/booking/create", booking, long.class); 
-			 bookingId = bookingClient.postForObject("http://localhost:8060/booking/create", booking, long.class); 
+			bookingId = bookingClient.postForObject("http://localhost:8060/booking/create", booking, long.class); 
 			logger.info("Booking created "+ bookingId);
 		}catch (Exception e){
 			logger.error("BOOKING SERVICE NOT AVAILABLE...!!!");
