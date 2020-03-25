@@ -20,11 +20,11 @@ public class SearchComponent {
 	
 	
 	@Autowired
-	public SearchComponent(FlightRepository flightRepository){
+	public SearchComponent(FlightRepository flightRepository) {
 		this.flightRepository = flightRepository;
 	}
 
-	public List<Flight> search(SearchQuery query){
+	public List<Flight> search(SearchQuery query) {
 		List<Flight> flights= flightRepository.findByOriginAndDestinationAndFlightDate(query.getOrigin(),
 																query.getDestination(),
 																query.getFlightDate()); 
@@ -33,7 +33,7 @@ public class SearchComponent {
 		flights.forEach(flight -> {
 			flight.getFares();
 			int inv = flight.getInventory().getCount();
-			if(inv < 0) {
+			if (inv < 0) {
 				searchResult.remove(flight);
 			}
 		});

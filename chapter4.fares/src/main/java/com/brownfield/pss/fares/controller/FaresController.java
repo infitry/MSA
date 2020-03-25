@@ -16,12 +16,12 @@ public class FaresController {
 	FaresComponent faresComponent;
 	
 	@Autowired
-	FaresController(FaresComponent faresComponent){
+	FaresController(FaresComponent faresComponent) {
 	 this.faresComponent = faresComponent;
 	}
 
 	@RequestMapping("/get")
-	Fare getFare(@RequestParam(value="flightNumber", required=false) String flightNumber, @RequestParam(value="flightDate", required=false) String flightDate){
+	Fare getFare(@RequestParam(value="flightNumber", required=false) String flightNumber, @RequestParam(value="flightDate", required=false) String flightDate) {
 		return faresComponent.getFare(flightNumber,flightDate);
 	}
 }

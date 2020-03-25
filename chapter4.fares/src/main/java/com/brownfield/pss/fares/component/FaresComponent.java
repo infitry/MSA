@@ -14,15 +14,15 @@ public class FaresComponent {
 
 	FaresRepository faresRepository;
 	
-	public FaresComponent(){
+	public FaresComponent() {
 		
 	}
 	@Autowired
-	public FaresComponent(FaresRepository faresRepository){
+	public FaresComponent(FaresRepository faresRepository) {
 		this.faresRepository = faresRepository;
 	}
 
-	public Fare getFare(String flightNumber, String flightDate){ 
+	public Fare getFare(String flightNumber, String flightDate) { 
 		logger.info("Looking for fares flightNumber "+ flightNumber + " flightDate "+ flightDate);
 		return faresRepository.getFareByFlightNumberAndFlightDate(flightNumber, flightDate);
 	}
